@@ -63,6 +63,20 @@
     - install
     - install:configuration
 
+- name: writing celerybeat supervisor scripts
+  template:
+    src: "celerybeat.conf.j2"
+    dest: "{{ supervisor_available_dir }}/celerybeat.conf"
+    owner: "{{ supervisor_user }}"
+    group: "{{ supervisor_user }}"
+    mode: 0644
+    become_user: "{{ supervisor_user }}"
+    tags:
+      - install
+      - install:configuration
+      - install:celerybeat
+      when: EDXAPP_CELERY_BEAT_LMS_ENABLED or EDXAPP_CELERY_BEAT_CMS_ENABLED
+
 - name: add gunicorn configuration files
   template:
     src: "{{ item }}_gunicorn.py.j2"
@@ -87,6 +101,19 @@
   tags:
     - install
     - install:configuration
+
+- name: "enable celerybeat supervisor script"
+  file:
+    src: "{{ supervisor_available_dir }}/celerybeat.conf"
+    dest: "{{ supervisor_cfg_dir }}/celerybeat.conf"
+    state: link
+    force: yes
+    become_user: "{{ supervisor_user }}"
+    when: celery_worker is not defined and not disable_edx_services and
+          (EDXAPP_CELERY_BEAT_LMS_ENABLED or EDXAPP_CELERY_BEAT_CMS_ENABLED)
+    tags:
+      - install
+      - install:configuration
 
 - name: enable edxapp supervisor script
   file:
