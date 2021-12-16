@@ -1218,9 +1218,9 @@ generic_env_config:  &edxapp_generic_env
       - ISSUER: "{{ EDXAPP_LMS_ISSUER }}"
         AUDIENCE: "{{ EDXAPP_JWT_AUDIENCE }}"
         SECRET_KEY: "{{ EDXAPP_JWT_SECRET_KEY }}"
-    JWT_PUBLIC_SIGNING_JWK_SET: "{{ EDXAPP_JWT_PUBLIC_SIGNING_JWK_SET | to_string }}"
+    JWT_PUBLIC_SIGNING_JWK_SET: "{{ EDXAPP_JWT_PUBLIC_SIGNING_JWK_SET }}"
     JWT_SIGNING_ALGORITHM: "{{ EDXAPP_JWT_SIGNING_ALGORITHM }}"
-    JWT_PRIVATE_SIGNING_JWK: "{{ EDXAPP_JWT_PRIVATE_SIGNING_JWK | to_string }}"
+    JWT_PRIVATE_SIGNING_JWK: "{{ EDXAPP_JWT_PRIVATE_SIGNING_JWK }}"
 
   #must end in slash (https://docs.djangoproject.com/en/1.4/ref/settings/#media-url)
   MEDIA_URL:  "{{ EDXAPP_MEDIA_URL }}/"
