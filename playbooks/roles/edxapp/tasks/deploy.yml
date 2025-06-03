@@ -328,10 +328,12 @@
 # creates the supervisor jobs for the
 # service variants configured, runs
 # gather_assets and db migrations
-- include: service_variant_config.yml
+- name: Include service variant configuration
+  ansible.builtin.include_tasks: service_variant_config.yml
   tags:
     - service_variant_config
     - deploy
+
 
   # call supervisorctl update. this reloads
   # the supervisorctl config and restarts
@@ -396,11 +398,13 @@
     - install:configuration
     - install:code
 
-- include: tag_ec2.yml tags=deploy
+- name: Tag EC2 instance
+  ansible.builtin.include_tasks: tag_ec2.yml
   when: COMMON_TAG_EC2_INSTANCE
   tags:
     - remove
     - aws
+
 
 - set_fact:
     edxapp_installed: true

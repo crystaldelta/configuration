@@ -59,7 +59,7 @@
     group: "{{ common_web_group }}"
 
 - name: grab ssh host keys
-  shell: ssh-keyscan {{ item }}
+  shell: ssh-keyscan -T 5 -t rsa {{ item }}
   become_user: "{{ common_web_user }}"
   with_items: "{{ GITRELOAD_HOSTS }}"
   register: gitreload_repo_host_keys
@@ -81,4 +81,5 @@
   - python
   - pip
 
-- include: deploy.yml tags=deploy
+- ansible.builtin.include_tasks: deploy.yml
+  tags: deploy
