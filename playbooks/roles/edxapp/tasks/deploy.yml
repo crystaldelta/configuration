@@ -107,12 +107,13 @@
     update: yes
     force: yes
     key_file: "{{ edxapp_git_ssh }}"
+  become_user: "{{ edxapp_user }}"
   environment:
     GIT_SSH: "{{ edxapp_git_ssh }}"
-  become_user: "{{ edxapp_user }}"
+  register: edxapp_platform_checkout
   tags:
     - install
-    - install:base
+    - install:code
 
 - name: install python dependencies
   pip:
