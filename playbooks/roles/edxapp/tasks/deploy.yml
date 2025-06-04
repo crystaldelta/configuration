@@ -41,7 +41,24 @@
   become_user: "{{ edxapp_user }}"
   tags:
     - install
-    - install:base
+    - install:base 
+
+- name: Ensure .ssh directory exists
+  file:
+    path: "/home/{{ edxapp_user }}/.ssh"
+    state: directory
+    owner: "{{ edxapp_user }}"
+    mode: '0700'
+
+- name: Add GitHub to known_hosts
+  known_hosts:
+    name: github.com
+    key: "{{ lookup('pipe', 'ssh-keyscan -t rsa,ed25519 github.com') }}"
+    path: "/home/{{ edxapp_user }}/.ssh/known_hosts"
+  become: true
+  tags:
+    - install
+    - install:base   
 
 # Do A Checkout
 - name: checkout edx-platform repo into {{ edxapp_code_dir }}
