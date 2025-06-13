@@ -322,7 +322,8 @@
 # creates the supervisor jobs for the
 # service variants configured, runs
 # gather_assets and db migrations
-- include: service_variant_config.yml
+- name: Include service variant configuration
+  include: service_variant_config.yml
   tags:
     - service_variant_config
     - deploy
