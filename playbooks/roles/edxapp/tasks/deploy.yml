@@ -347,6 +347,7 @@
 # gather_assets and db migrations
 - name: Include service variant configuration
   include: service_variant_config.yml
+  static: yes
   tags:
     - service_variant_config
     - deploy
