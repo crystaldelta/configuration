@@ -342,11 +342,19 @@
     - install
     - install:configuration
 
+- name: Load service variant variables from file
+  ansible.builtin.include_vars:
+    file: /edx/app/edxapp/service_variant_config.yml
+  tags:
+    - service_variant_config
+    - deploy
+
 # creates the supervisor jobs for the
 # service variants configured, runs
 # gather_assets and db migrations
 - name: Include service variant configuration
   ansible.builtin.include_tasks: service_variant_config.yml
+  static: yes
   tags:
     - service_variant_config
     - deploy
