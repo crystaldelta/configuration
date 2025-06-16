@@ -345,12 +345,12 @@
 # creates the supervisor jobs for the
 # service variants configured, runs
 # gather_assets and db migrations
-#- name: Include service variant configuration
-#  include: service_variant_config.yml
-#  static: yes
-#  tags:
-#    - service_variant_config
-#    - deploy
+- name: Include service variant configuration
+  include: service_variant_config.yml
+  static: yes
+  tags:
+    - service_variant_config
+    - deploy
 
 
   # call supervisorctl update. this reloads
