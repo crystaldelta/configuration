@@ -323,7 +323,7 @@
 # service variants configured, runs
 # gather_assets and db migrations
 - name: Include service variant configuration
-  include: service_variant_config.yml
+  ansible.builtin.include_tasks: service_variant_config.yml
   tags:
     - service_variant_config
     - deploy
@@ -388,7 +388,8 @@
     - install:configuration
     - install:code
 
-- include: tag_ec2.yml tags=deploy
+- name: Tag EC2 instance
+  ansible.builtin.include_tasks: tag_ec2.yml
   when: COMMON_TAG_EC2_INSTANCE
   tags:
     - remove
