@@ -334,12 +334,10 @@
     owner: "{{ edxapp_user }}"
     group: "{{ common_web_group }}"
     mode: "og+rx"
-  loop:
+  with_items:
     - "lms.sh"
     - "cms.sh"
     - "worker.sh"
-  loop_control:
-    label: "{{ item }}"
   tags:
     - install
     - install:configuration
