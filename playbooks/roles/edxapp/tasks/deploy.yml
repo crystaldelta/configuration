@@ -346,7 +346,7 @@
 # service variants configured, runs
 # gather_assets and db migrations
 - name: Include service variant configuration
-  import_tasks: service_variant_config.yml
+  include: service_variant_config.yml
   tags:
     - service_variant_config
     - deploy
