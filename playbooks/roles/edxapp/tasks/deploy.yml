@@ -348,8 +348,7 @@
 # service variants configured, runs
 # gather_assets and db migrations
 - name: Include service variant configuration
-  ansible.builtin.include_tasks: 
-    file: service_variant_config.yml
+  include_tasks: service_variant_config.yml
   tags:
     - service_variant_config
     - deploy
