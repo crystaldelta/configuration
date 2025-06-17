@@ -81,5 +81,5 @@
   - python
   - pip
 
-- ansible.builtin.include_tasks: deploy.yml
+- include: deploy.yml
   tags: deploy
