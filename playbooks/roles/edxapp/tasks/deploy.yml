@@ -351,11 +351,10 @@
     - service_variant_config
     - deploy
 
-
-  # call supervisorctl update. this reloads
-  # the supervisorctl config and restarts
-  # the services if any of the configurations
-  # have changed.
+# call supervisorctl update. this reloads
+# the supervisorctl config and restarts
+# the services if any of the configurations
+# have changed.
 
 - name: update supervisor configuration
   shell:  "{{ supervisor_ctl }} -c {{ supervisor_cfg }} update"
@@ -421,7 +420,6 @@
   tags:
     - remove
     - aws
-
 
 - set_fact:
     edxapp_installed: true
